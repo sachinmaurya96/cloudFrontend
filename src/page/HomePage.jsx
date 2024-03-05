@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import rigtmenu from "../assets/rightmenu.png";
 import Bearish from "../assets/bearish.png";
@@ -18,179 +18,283 @@ import doc3 from "../assets/doc3.svg";
 import image from "../assets/image.svg";
 import video from "../assets/video.svg";
 import docoutline from "../assets/docoutline.svg";
+import search from "../assets/search.svg";
+import homeIcon from "../assets/home.svg";
+import videooutline from "../assets/videooutline.svg";
+import message from "../assets/message.svg";
+import calender from "../assets/calender.svg";
+import checked from "../assets/checked.svg";
+import group from "../assets/group.svg";
+import person from "../assets/person.svg";
+import mail from "../assets/mail.svg";
 import Card from "../component/Card";
 import Folder from "../component/Folder";
 import FilesTable from "../component/FilesTable";
+import ActiveLink from "../component/ActiveLink";
+import BarishOsCard from "../component/BarishOsCard";
 const HomePage = () => {
+  const [toggle, setToggle] = useState(false);
+  const sidebarList = [
+    { icon: search, name: "Search" },
+    { icon: homeIcon, name: "Home" },
+    { icon: videooutline, name: "Video" },
+    { icon: mail, name: "Mail" },
+    { icon: calender, name: "Plan" },
+    { icon: checked, name: "Task" },
+    { icon: message, name: "Stream" },
+    { icon: group, name: "CRM" },
+    { icon: person, name: "Trax" },
+  ];
   return (
     <Wrapper>
-      <div className="left_Sidebar">
-        <div className="top">
-          <div className="logo_name">
-            <img src={Bearish} alt="logo" />
-            <div className="company_name">company name</div>
-          </div>
-          <div className="polygon"></div>
-        </div>
-        <div className="create_new">
-          <button>
-            <img src={penIcon} alt="" height={15} width={15} />
-            Create New
-          </button>
-          <div className="plug_icon">
-            <img src={plugIcon} alt="" height={15} width={15} />
-          </div>
-        </div>
-        <div className="cloud_storage">
-          <div className="title">Cloud Storage</div>
-          <ul>
-            <li>
-              <div className="icons_name">
-                <img src={Bearish} alt="" />
-                Bearish OS
-              </div>
-              <div className="action">
-                <img src={settingIcon} alt="" />
-              </div>
-            </li>
-            <li>
-              <div className="icons_name">
-                <img src={drive} alt="" />
-                Google Drive
-              </div>
-              <div className="action">
-                <img src={settingIcon} alt="" />
-              </div>
-            </li>
-            <li>
-              <div className="icons_name">
-                <img src={dropbox} alt="" />
-                DropBox
-              </div>
-              <div className="action">
-                <img src={settingIcon} alt="" />
-              </div>
-            </li>
-          </ul>
-          <button>
-            <span></span>View More
-          </button>
-        </div>
-        <div className="shared">
-          <div className="title">Shared</div>
-        </div>
-      </div>
-      <div className="main">
-        <div className="top">
-          <div className="left">
-            <div className="hamburger"></div>
-            <div className="title">Cloudstorage</div>
-          </div>
-          <div className="right">
-            <div className="logo">TU</div>
-          </div>
-        </div>
-        <div className="clouds">
-          <div className="title">My Cloud Storage</div>
-          <div className="cloud_details">
-            <div className="cloud_cards">
-              <Card title={"Google Drive"} logo={drive} progress={"drive"} />
-              <Card title={"Dropbox"} logo={dropbox} progress={"dropbox"} />
-              <Card title={"Box"} logo={box} progress={"box"} />
+      <div className={`container ${toggle && "hide"}`}>
+        {toggle && (
+          <div className="left_fixed_sidebar">
+            <div className="logo">
+              <img src={Bearish} alt="logo" />
             </div>
-            <div className="next_button">
-              <span></span>
+            <ul>
+              {sidebarList.map((element) => (
+                <li>
+                  <img src={element.icon} alt={element.name} />
+                  <span className="name">{element.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <div className={`left_Sidebar ${toggle && "hide_sidebar"}`}>
+          <div className="top">
+            <div className="logo_name">
+              <img src={Bearish} alt="logo" />
+              <div className="company_name">company name</div>
+            </div>
+            <div className="polygon"  onClick={()=>setToggle(!toggle)}></div>
+          </div>
+          <div className="create_new">
+            <button>
+              <img src={penIcon} alt="" height={15} width={15} />
+              Create New
+            </button>
+            <div className="plug_icon">
+              <img src={plugIcon} alt="" height={15} width={15} />
             </div>
           </div>
+          <div className="cloud_storage">
+            <div className="title">Cloud Storage</div>
+            <ul>
+              <li>
+                <div className="icons_name">
+                  <img src={Bearish} alt="" />
+                  Bearish OS
+                </div>
+                <div className="action">
+                  <img src={settingIcon} alt="" />
+                </div>
+              </li>
+              <li>
+                <div className="icons_name">
+                  <img src={drive} alt="" />
+                  Google Drive
+                </div>
+                <div className="action">
+                  <img src={settingIcon} alt="" />
+                </div>
+              </li>
+              <li>
+                <div className="icons_name">
+                  <img src={dropbox} alt="" />
+                  DropBox
+                </div>
+                <div className="action">
+                  <img src={settingIcon} alt="" />
+                </div>
+              </li>
+            </ul>
+            <button>
+              <span></span>View More
+            </button>
+          </div>
+          <div className="shared">
+            <div className="title">Shared</div>
+          </div>
         </div>
-        <div className="folders">
-          <div className="folder_header">
+        <div className="main">
+          <div className="top">
             <div className="left">
-              <div className="name_logo">
-                <img src={folder} alt="folder" />
-                <span className="title">Folders</span>
-              </div>
+              {toggle && (
+                <div className="hamburger" onClick={()=>setToggle(!toggle)}>
+                  <img src={list} alt={"hamburger"} />
+                </div>
+              )}
+              <div className="title">Cloudstorage</div>
             </div>
             <div className="right">
-              <div className="category active">
-                <img src={category} alt="category" />
-              </div>
-              <div className="list">
-                <img src={list} alt="" />
-              </div>
-              <button>Show all folders</button>
+              <div className="logo">TU</div>
             </div>
           </div>
-          <div className="folder_details">
-            <div className="folder_cards">
-              <Folder />
-              <Folder />
-              <Folder />
+          <div className="clouds">
+            <div className="title">My Cloud Storage</div>
+            <div className="cloud_details">
+              <div className="cloud_cards">
+                <Card title={"Google Drive"} logo={drive} progress={"drive"} />
+                <Card title={"Dropbox"} logo={dropbox} progress={"dropbox"} />
+                <Card title={"Box"} logo={box} progress={"box"} />
+              </div>
+              <div className="next_button">
+                <span></span>
+              </div>
             </div>
-            <div className="next_button">
-              <span></span>
+          </div>
+          <div className="folders">
+            <div className="folder_header">
+              <div className="left">
+                <div className="name_logo">
+                  <img src={folder} alt="folder" />
+                  <span className="title">Folders</span>
+                </div>
+              </div>
+              <div className="right">
+                <div className="category active">
+                  <img src={category} alt="category" />
+                </div>
+                <div className="list">
+                  <img src={list} alt="" />
+                </div>
+                <button>Show all folders</button>
+              </div>
+            </div>
+            <div className="folder_details">
+              <div className="folder_cards">
+                <Folder />
+                <Folder />
+                <Folder />
+              </div>
+              <div className="next_button">
+                <span></span>
+              </div>
+            </div>
+          </div>
+          <div className="files">
+            <div className="files_header">
+              <div className="left">
+                <div className="title">
+                  <img src={docoutline} alt="document" />
+                  Files
+                </div>
+                <div className="icons">
+                  <img src={doc} alt="document" />
+                  <img src={doc1} alt="document" />
+                  <img src={doc2} alt="document" />
+                  <img src={doc3} alt="document" />
+                  <img src={image} alt="document" />
+                  <img src={video} alt="document" />
+                </div>
+              </div>
+              <div className="right">
+                <div className="category active">
+                  <img src={category} alt="category" />
+                </div>
+                <div className="list">
+                  <img src={list} alt="" />
+                </div>
+                <button>Show all files</button>
+              </div>
+            </div>
+            <div className="files_table">
+              <FilesTable />
             </div>
           </div>
         </div>
-        <div className="files">
-          <div className="files_header">
+        <div className="right_sidebar">
+          <div className="top">
             <div className="left">
-              <div className="title">
-                <img src={docoutline} alt="document" />
-                Files
-              </div>
-              <div className="icons">
-                <img src={doc} alt="document" />
-                <img src={doc1} alt="document" />
-                <img src={doc2} alt="document" />
-                <img src={doc3} alt="document" />
-                <img src={image} alt="document" />
-                <img src={video} alt="document" />
-              </div>
+              <span className="title">Cloud Analytics</span>
+              <span className="sub_title">5 Active analytics link</span>
             </div>
             <div className="right">
-              <div className="category active">
-                <img src={category} alt="category" />
-              </div>
-              <div className="list">
-                <img src={list} alt="" />
-              </div>
-              <button>Show all files</button>
+              <img src={rigtmenu} alt="" />
             </div>
           </div>
-          <div className="files_table">
-            <FilesTable/>
+          <div className="links">
+            <ActiveLink />
+            <ActiveLink />
+            <ActiveLink />
+          </div>
+          <div className="upload">
+            <BarishOsCard />
           </div>
         </div>
-      </div>
-      <div className="right_sidebar">
-        <div className="top">
-          <div className="left">
-            <span className="title">Cloud Analytics</span>
-            <span className="sub_title">5 Active analytics link</span>
-          </div>
-          <div className="right">
-            <img src={rigtmenu} alt="" />
-          </div>
-        </div>
-        <div className="links"></div>
-        <div className="upload"></div>
       </div>
     </Wrapper>
   );
 };
 const Wrapper = styled.section`
-  height: 100vh;
-  width: 100vw;
-  background-color: #f2f5f8;
-  display: grid;
-  grid-template-columns: 275px 1fr 275px;
+  .container {
+    height: 100vh;
+    width: 100vw;
+    background-color: #f2f5f8;
+    display: grid;
+    grid-template-columns: 275px 1fr 275px;
+    transition: 0.3s ;
+    position: relative;
+    transition: all 0.5s ease;
+  }
+  .hide{
+    grid-template-columns: 1fr 275px;
+    transition: all 0.5s ease;
+  }
   .polygon {
     width: 0;
     height: 0;
     border-top: 5px solid transparent;
     border-left: 6px solid #00767b;
     border-bottom: 5px solid transparent;
+    cursor: pointer;
+  }
+  .left_fixed_sidebar {
+    padding: 10px 0;
+    position: fixed;
+    left: 5px;
+    top: 20px;
+    width: 50px;
+    height: 600px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 2px solid #e9edf2;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    .logo {
+      img {
+        height: 30px;
+        width: 30px;
+      }
+      padding-bottom: 10px;
+      
+    }
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        align-items: center;
+        img {
+          height: 25px;
+          width: 25px;
+        }
+        .name {
+          font: normal normal 300 11px/15px Source Serif Pro;
+        }
+      }
+    }
   }
   .left_Sidebar {
     background: #fff;
@@ -199,6 +303,7 @@ const Wrapper = styled.section`
     flex-direction: column;
     gap: 20px;
     border-right: 1px solid #e9edf2;
+    transition: all 0.5s ease;
     .top {
       display: flex;
       align-items: center;
@@ -283,6 +388,14 @@ const Wrapper = styled.section`
       }
     }
   }
+  .hide_sidebar{
+    position: absolute;
+    width: 275px;
+    height: 100%;
+    background-color: #fff;
+    left: -275px;
+    transition: all 0.5s ease;
+  }
   .main {
     display: flex;
     flex-direction: column;
@@ -296,6 +409,17 @@ const Wrapper = styled.section`
       border-bottom: 1px solid #e9edf2;
       .title {
         font: normal normal 600 15px/21px Source Serif Pro;
+      }
+      .left {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        .hamburger {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
       }
       .right {
         width: max-content;
@@ -435,7 +559,7 @@ const Wrapper = styled.section`
             gap: 5px;
             font: normal normal 600 18px/25px Source Serif Pro;
           }
-          .icons{
+          .icons {
             display: flex;
             align-items: center;
             gap: 5px;
@@ -462,6 +586,13 @@ const Wrapper = styled.section`
       }
     }
   }
+  .hide{
+    .main{
+      .top,.clouds,.folders,.files{
+        padding-left: 70px;
+      }
+    }
+  }
   .right_sidebar {
     background-color: #fff;
     border-left: 1px solid #e9edf2;
@@ -484,6 +615,11 @@ const Wrapper = styled.section`
           font: normal normal 200 11px/15px Source Serif Pro;
         }
       }
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
   }
 `;
