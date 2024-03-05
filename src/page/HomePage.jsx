@@ -220,6 +220,9 @@ const HomePage = () => {
             <ActiveLink />
             <ActiveLink />
             <ActiveLink />
+            <button>
+              <span></span>View More
+            </button>
           </div>
           <div className="upload">
             <BarishOsCard />
@@ -621,6 +624,23 @@ const Wrapper = styled.section`
       display: flex;
       flex-direction: column;
       gap: 10px;
+      button {
+        background: transparent;
+        border: none;
+        outline: none;
+        width: max-content;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        font: normal normal normal 11px/15px Source Serif Pro;
+        span {
+          width: 0;
+          height: 0;
+          border-left: 7px solid transparent;
+          border-right: 7px solid transparent;
+          border-top: 7px solid #00767b;
+        }
+      }
     }
   }
 `;
