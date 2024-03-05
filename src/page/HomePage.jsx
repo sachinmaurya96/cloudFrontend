@@ -242,6 +242,9 @@ const Wrapper = styled.section`
     position: relative;
     transition: all 0.5s ease;
   }
+  img{
+    cursor:  pointer;
+  }
   .hide {
     grid-template-columns: 1fr 275px;
     transition: all 0.5s ease;
