@@ -69,7 +69,7 @@ const HomePage = () => {
               <img src={Bearish} alt="logo" />
               <div className="company_name">company name</div>
             </div>
-            <div className="polygon"  onClick={()=>setToggle(!toggle)}></div>
+            <div className="polygon" onClick={() => setToggle(!toggle)}></div>
           </div>
           <div className="create_new">
             <button>
@@ -123,7 +123,7 @@ const HomePage = () => {
           <div className="top">
             <div className="left">
               {toggle && (
-                <div className="hamburger" onClick={()=>setToggle(!toggle)}>
+                <div className="hamburger" onClick={() => setToggle(!toggle)}>
                   <img src={list} alt={"hamburger"} />
                 </div>
               )}
@@ -233,14 +233,13 @@ const Wrapper = styled.section`
   .container {
     height: 100vh;
     width: 100vw;
-    background-color: #f2f5f8;
     display: grid;
     grid-template-columns: 275px 1fr 275px;
-    transition: 0.3s ;
+    transition: 0.3s;
     position: relative;
     transition: all 0.5s ease;
   }
-  .hide{
+  .hide {
     grid-template-columns: 1fr 275px;
     transition: all 0.5s ease;
   }
@@ -273,7 +272,6 @@ const Wrapper = styled.section`
         width: 30px;
       }
       padding-bottom: 10px;
-      
     }
     ul {
       list-style: none;
@@ -388,13 +386,13 @@ const Wrapper = styled.section`
       }
     }
   }
-  .hide_sidebar{
+  .hide_sidebar {
     position: absolute;
     width: 275px;
     height: 100%;
     background-color: #fff;
     left: -275px;
-    transition: all 0.5s ease;
+    transition: left 0.5s;
   }
   .main {
     display: flex;
@@ -586,9 +584,12 @@ const Wrapper = styled.section`
       }
     }
   }
-  .hide{
-    .main{
-      .top,.clouds,.folders,.files{
+  .hide {
+    .main {
+      .top,
+      .clouds,
+      .folders,
+      .files {
         padding-left: 70px;
       }
     }
